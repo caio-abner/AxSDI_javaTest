@@ -7,29 +7,21 @@ Requisitos funcionais
 Objetivo: a partir de uma URL, obter o trecho de texto contido no nível mais profundo da estrutura HTML de seu conteúdo.
 Por exemplo: http://hiring.axreng.com/internship/example1.html
 
-<html>
-	<head>
-		<title>
-			Este é o título.
-		</title>
-	</head>
-	<body>
-		Este é o corpo.
-	</body>
-</html>
-
 Na estrutura HTML acima, o trecho desejado como retorno é "Este é o título." (sem as aspas), porque está em 3 níveis de profundidade (html > head > title), enquanto o trecho "Este é o corpo." está em 2 níveis (html > body).
 Se dois ou mais trechos estiverem no nível máximo de profundidade do documento, o primeiro deles deve ser retornado.
 Para simplificar o escopo do problema, a solução deve se basear nas seguintes premissas:
 
 1. O código HTML está dividido em linhas;
 2. Cada linha pode ser apenas de um dos seguintes tipos:
-	a. Tag de abertura (exemplo: <div>)
-	b. Tag de fechamento (exemplo: </div>)
+	
+ 	a. Tag de abertura (exemplo: &lt;div&gt;)
+
+	b. Tag de fechamento (exemplo: &lt;/div&gt;)
+
 	c. Trecho de texto (exemplo: “Este é o corpo.”)
-3. Uma mesma linha não pode conter dois tipos de conteúdo;
-4. Apenas elementos HTML com pares de tags de abertura e fechamento são utilizados (exemplo: <div> e </div>, mas não <br/>)
-5. Tags de abertura não possuem atributos (contra-exemplo: <a href=”link.html”>).
+4. Uma mesma linha não pode conter dois tipos de conteúdo;
+5. Apenas elementos HTML com pares de tags de abertura e fechamento são utilizados (exemplo: &lt;div&gt; e &lt;/div&gt;, mas não &lt;br/&gt;)
+6. Tags de abertura não possuem atributos (contra-exemplo: &lt;a href=”link.html"&gt;).
 
 Cada linha pode ou não ter espaços iniciais, utilizados meramente para indentação, que devem ser ignorados.
 Linhas em branco também devem ser ignoradas.
