@@ -11,34 +11,45 @@ import java.util.regex.Pattern;
 
 public class HtmlAnalyzer {
     private static String deepestText = "";
+
+    // variable set to -1 to avoid confusion with the first level 0
     private static int deepestLevel = -1;
+
     public static void startAnalyzer(String url) {
+        // try to connect to the URL and get the HTML content
         try {
             URLConnection connection = new URL(url).openConnection();
             connection.connect();
             String html = new String(connection.getInputStream().readAllBytes());
+
             if (IsHtmlMalformed(html)) {
                 throw new Exception("malformed HTML");
-            }
-            Analyze(html);
+            } else
+                Analyze(html);
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
+    // Recursive function to find the deepest text in the HTML
     public static void Analyze(String html){
         findDeepestText(html, 0);
         System.out.println(deepestText);
     }
 
     private static void findDeepestText(String html, int level) {
+
+        // Regular expression to match HTML tags
         String regex = "<[^>]*>([^<]*)</[^>]*>";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(html);
 
+        // If a match is found, the function is called recursively
         if (matcher.find()) {
             findDeepestText(matcher.group(1), level + 1);
-        } else if (level > deepestLevel) {
+        }
+        else if (level > deepestLevel) {
             deepestLevel = level;
             deepestText = html.trim();
         }
